@@ -1,8 +1,7 @@
-const CACHE_NAME = 'nexus-zone-pwa-v1';
+const CACHE_NAME = 'nexus-zone-pwa-v3';
 const APP_SHELL = [
   './',
   './index.html',
-  './manifest.webmanifest',
   './icon.svg',
   './pwa-192x192.png',
   './pwa-512x512.png',
@@ -36,12 +35,15 @@ self.addEventListener('fetch', (event) => {
   if (req.method !== 'GET') return;
 
   const url = new URL(req.url);
-  // Keep Firebase, Google Auth, and external API traffic network-only
   if (url.origin !== self.location.origin) {
     return;
   }
 
-  // Network-first for HTML navigation so GitHub Pages updates appear promptly
+  if (url.pathname.endsWith('manifest.webmanifest')) {
+    event.respondWith(fetch(req, { cache: 'no-store' }).catch(() => caches.match(req)));
+    return;
+  }
+
   if (req.mode === 'navigate') {
     event.respondWith(
       fetch(req)
@@ -57,7 +59,6 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Cache-first with background refresh for static local icons & manifest
   event.respondWith(
     caches.match(req).then((cached) => {
       const networkFetch = fetch(req)
