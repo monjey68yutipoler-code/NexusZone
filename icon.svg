@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <rect width="512" height="512" rx="112" fill="#080b1c"/>
+  <defs>
+    <linearGradient id="nz-grad" x1="110" y1="96" x2="402" y2="416" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+  <path d="M256 84L384 150V272C384 348 326 404 256 428C186 404 128 348 128 272V150L256 84Z" stroke="url(#nz-grad)" stroke-width="26" stroke-linejoin="round"/>
+  <path d="M286 132L194 274H258L226 382L322 238H258L286 132Z" fill="url(#nz-grad)"/>
+</svg>
